@@ -32,6 +32,14 @@ pipeline {
             }
         }
 
+        stage('Build AWS image') {
+            steps {
+                    sh '''
+                        docker build -f ci/Dockerfile-playwright -t my-playwright .
+                        docker build -f ci/Dockerfile-aws-cli -t my-aws-cli .
+                    '''
+            }
+        }
         stage('Build Docker image') {
             agent {
                 docker {
