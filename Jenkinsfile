@@ -35,9 +35,9 @@ pipeline {
         stage('Build AWS image') {
             agent {
                 docker {
-                    image 'docker:24.0.2'
+                    image 'node:18-alpine'
                     reuseNode true
-                    args "-u root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=''"
+                    args "-u root"
                 }
             }
             steps {
