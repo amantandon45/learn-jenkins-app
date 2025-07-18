@@ -33,6 +33,13 @@ pipeline {
         }
 
         stage('Build AWS image') {
+            agent {
+                docker {
+                    image 'amazonlinux:2'
+                    reuseNode true
+                    args "-u root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=''"
+                }
+            }
             steps {
                     sh '''
                         docker build -f ci/Dockerfile-playwright -t my-playwright .
